@@ -1,0 +1,16 @@
+<launch>
+  <!-- Set robot model -->
+  <arg name="model" default="burger" />
+  <arg name="map_file" default="/opt/ros/melodic/share/turtlebot3_navigation/maps/map.yaml" />
+  <arg name="open_rviz" default="true" />
+
+  <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+    <arg name="map_file" value="$(arg map_file)" />
+    <arg name="open_rviz" value="$(arg open_rviz)" />
+  </include>
+
+  <!-- Change planner parameters -->
+  <rosparam param="base_global_planner">global_planner/GlobalPlanner</rosparam>
+  <rosparam param="base_local_planner">teb_local_planner/TebLocalPlannerROS</rosparam>
+</launch>
+
