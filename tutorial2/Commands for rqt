@@ -1,0 +1,33 @@
+Commands for manual control rqt:
+
+Terminal 1:
+$ export TURTLEBOT_MODEL3=burger
+$ roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+
+Terminal 2:
+$ rqt
+__sliders_______________________________________________
+*window opens* → Plugins → Robot Tools → Robot Steering
+choose topic : /cmd_vel
+________________________________________________________
+__velocity_msg__________________________________________
+*window opens* → Plugins → Topics → Message Publisher
+choose topic : /cmd_vel
+choose type  : geometry_msgs/Twist
+messagefield : 
+linear:
+  x: 0.2
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.5
+________________________________________________________
+
+Terminal 3:
+view data with
+$ rqt_graph
+$ rqt_console
+$ rqt_plot
+
