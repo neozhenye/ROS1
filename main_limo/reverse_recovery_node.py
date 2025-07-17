@@ -86,20 +86,34 @@ class ReverseRecovery:
             rate.sleep()
 
         # Step 2: Stop
-        twist.linear.x = 0.0
+        twist = Twist()
         self.cmd_pub.publish(twist)
+        rospy.sleep(0.5)
 
-        # Step 3: Try clearing one more time
+        # ✅ Step 3: Spin in place (rotate 360° slowly)
+        twist.angular.z = 0.5  # positive = counter-clockwise
+        spin_time = 2 * 3.14 / twist.angular.z  # ~1 full rotation (2π rad)
+
+        rospy.loginfo("Spinning in place to help localization...")
+        start_time = rospy.Time.now()
+        while rospy.Time.now() - start_time < rospy.Duration(spin_time):
+            self.cmd_pub.publish(twist)
+            rate.sleep()
+
+        # Stop
+        self.cmd_pub.publish(Twist())
+        rospy.sleep(0.5)
+
+        # Step 4: Clear costmaps again
         try:
             self.clear_costmap_srv()
-            rospy.loginfo("Final costmap clear after reverse.")
+            rospy.loginfo("Final costmap clear after reverse + spin.")
         except rospy.ServiceException as e:
             rospy.logerr("Final costmap clear failed: %s", e)
 
-        # Step 4: Resend goal
+        # Step 5: Resend goal
         if self.last_goal:
-            rospy.sleep(1.0)  # short delay to settle
-            rospy.loginfo("Resending goal after reverse.")
+            rospy.loginfo("Resending goal after reverse and spin.")
             self.goal_pub.publish(self.last_goal)
         else:
             rospy.logwarn("No goal available to resend.")
