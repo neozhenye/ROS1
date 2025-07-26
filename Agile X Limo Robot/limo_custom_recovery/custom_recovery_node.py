@@ -50,7 +50,7 @@ class ReverseRecovery:
         rospy.sleep(0.5)
 
         # Step 2: Clear costmaps repeatedly until no longer ABORTED
-        max_attempts = 20  # safety limit
+        max_attempts = 3  # safety limit
         attempts = 0
         while self.current_status == 4 and attempts < max_attempts and not rospy.is_shutdown():
             try:
@@ -90,9 +90,9 @@ class ReverseRecovery:
         self.cmd_pub.publish(twist)
         rospy.sleep(0.5)
 
-        # ✅ Step 3: Spin in place (rotate 360° slowly)
+        #Step 3: Spin in place (rotate 360 slowly)
         twist.angular.z = 0.5  # positive = counter-clockwise
-        spin_time = 2 * 3.14 / twist.angular.z  # ~1 full rotation (2π rad)
+        spin_time = 2*3.14 / twist.angular.z  
 
         rospy.loginfo("Spinning in place to help localization...")
         start_time = rospy.Time.now()
