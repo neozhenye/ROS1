@@ -16,10 +16,13 @@ The robot:
 - `square_movement.py`: Main Python script written for ROS (Python 2).
 - `README.md`: Documentation and usage instructions.
 
-## 🚀 Prerequisites
+## Bash cmd
 
-- ROS (tested on ROS Melodic or earlier using Python 2)
-- A TurtleBot or similar robot (real or simulated in Gazebo)
-- Proper ROS workspace setup with sourced environment:
+- source file
   ```bash
   source devel/setup.bash
+  ```
+- How to open file
+  ```bash
+  rosrun tutorial_1 square_mover
+  
