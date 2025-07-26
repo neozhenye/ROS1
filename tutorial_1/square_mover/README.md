@@ -11,11 +11,6 @@ The robot:
 3. Rotates approximately 90 degrees (2.1 seconds at ~0.83 rad/s),
 4. Repeats the process 4 times to complete a square.
 
-## 📁 Files
-
-- `square_movement.py`: Main Python script written for ROS (Python 2).
-- `README.md`: Documentation and usage instructions.
-
 ## Bash cmd
 
 - source file
